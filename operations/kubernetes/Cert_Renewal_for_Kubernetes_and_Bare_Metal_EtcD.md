@@ -8,7 +8,7 @@ As part of the installation, Kubernetes generates certificates for the required 
 
 **`IMPORTANT:`** When you pick your master node to renew the certs on, then that is the node that will be referenced in this document as `ncn-m`.
 
-**`IMPORTANT:`** This document is based off a base hardware configuration of 3 masters and 3 workers (We are leaving off utility storage since they are not running kubernetes).  Please make sure to update any commands that run on multiple nodes accordingly.  
+**`IMPORTANT:`** This document is based off a base hardware configuration of 3 masters and 3 workers (We are leaving off utility storage since they are not running kubernetes).  Please make sure to update any commands that run on multiple nodes accordingly.
 
 ## File locations
 
@@ -185,7 +185,7 @@ Check the expiration of the certificates.
     -rw-r--r-- 1 root root 1139 Sep 22 17:13 peer.crt
     -rw------- 1 root root 1679 Sep 22 17:13 peer.key
     -rw-r--r-- 1 root root 1139 Sep 22 17:13 server.crt
-    -rw------- 1 root root 1675 Sep 22 17:13 server.key   
+    -rw------- 1 root root 1675 Sep 22 17:13 server.key
     ```
 
    As we can see not all the certificate files were updated.
@@ -235,7 +235,7 @@ Check the expiration of the certificates.
    /var/lib/kubelet/pki/kubelet-client-2021-09-07-17-06-36.pem
    notAfter=Sep  4 17:01:38 2022 GMT
    /var/lib/kubelet/pki/kubelet-client-current.pem
-   notAfter=Sep  4 17:01:38 2022 GMT   
+   notAfter=Sep  4 17:01:38 2022 GMT
    ```
 
    **`IMPORTANT:`** DO NOT forget to verify certificates in /etc/kubernetes/pki/etcd.
@@ -334,7 +334,7 @@ Check the expiration of the certificates.
 
    This will generate a new kublet.conf file in the /root/ directory.  There should be a new file per node running kubernetes.
 
-3. Copy each file to the corresponding node shown in the filename. 
+3. Copy each file to the corresponding node shown in the filename.
 
    **`NOTE:`** Please update the below command with the appropriate amount of master and worker nodes.
 
@@ -376,7 +376,7 @@ Check the expiration of the certificates.
 
    1. Follow the [Reboot_NCNs](https://github.com/Cray-HPE/docs-csm/blob/release/0.9/operations/node_management/Reboot_NCNs.md) process.
 
-       **NOTES:** 
+       **NOTES:**
        - ncn-w001 is the externally connected node. On Shasta v1.4 and later, ncn-m001 is the externally connected node.
        - The ncnGetXnames.sh script is not available; The xname can be found in the file `/etc/cray/xname` on the specific node.
 
@@ -397,7 +397,7 @@ Check the expiration of the certificates.
 
    2. Follow the [Reboot_NCNs](https://github.com/Cray-HPE/docs-csm/blob/release/0.9/operations/node_management/Reboot_NCNs.md) process.
 
-       **NOTES:** 
+       **NOTES:**
        - ncn-w001 is the externally connected node. On Shasta v1.4 and later, ncn-m001 is the externally connected node.
        - The failover-leader.sh, ncnGetXnames.sh and add_pod_priority.sh scripts are not available or required when rebooting worker nodes.
        - After draining a worker, force delete any pod that fails to terminate due to `Cannot evict pod as it would violate the pod's disruption budget`.

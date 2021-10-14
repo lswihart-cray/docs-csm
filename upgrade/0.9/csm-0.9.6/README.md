@@ -89,10 +89,10 @@ It is important to first verify a healthy starting state. To do this, run the
 found, correct them and verify the appropriate validation checks before
 proceeding.
 
-<a name="apply-cray-hms-hmcollector-scale-changes"></a> 
+<a name="apply-cray-hms-hmcollector-scale-changes"></a>
 ## Apply cray-hms-hmcollector scale changes
 
-If no scaling changes are desired to be made against the cray-hms-hmcollector deployment or if they have have not been previously applied, then this section can be skipped and proceed onto the [Setup Nexus](#setup-nexus) section. 
+If no scaling changes are desired to be made against the cray-hms-hmcollector deployment or if they have have not been previously applied, then this section can be skipped and proceed onto the [Setup Nexus](#setup-nexus) section.
 
 Before [upgrading services](#upgrade-services), `customizations.yaml` in the `site-init` secret in the `loftsman` namespace must be updated to apply or re-apply any manual scaling changes made to the cray-hms-hmcollector deployment. Follow the [Adjust HM Collector resource limits and requests](../../../operations/hmcollector/adjust_hmcollector_resource_limits_requests.md) procedure for information about tuning and updating the resource limits used by the cray-hms-hmcollector deployment. The section `Redeploy cray-hms-hmcollector with new resource limits and request` of the referenced procedure can be skipped, as the `upgrade.sh` script will re-deploy the collector with the new resource limit changes.
 

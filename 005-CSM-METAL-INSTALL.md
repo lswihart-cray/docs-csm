@@ -140,7 +140,7 @@ CASMINST-980
 <a name="ensure-time-is-accurate-before-deploying-ncns"></a>
 ### Ensure Time Is Accurate Before Deploying NCNs
 
-**NOTE**: If you wish to use a timezone other than UTC, instead of step 1 below, follow 
+**NOTE**: If you wish to use a timezone other than UTC, instead of step 1 below, follow
 [this procedure for setting a local timezone](108-NCN-NTP.md#setting-a-local-timezone), then
 proceed to step 2.
 
@@ -246,7 +246,7 @@ The configuration workflow described here is intended to help understand the exp
     - The third master node ncn-m003 boots and waits for ncn-m002 to create the `/etc/cray/kubernetes/join-command-control-plane` so it can join Kubernetes
     - The second master node ncn-m002 boots, runs the kubernetes-cloudinit.sh which will create /etc/kubernetes/admin.conf and /etc/cray/kubernetes/join-command-control-plan, then waits for the storage node to create etcd-backup-s3-credentials
 1. Once ncn-s001 notices that ncn-m002 has created /etc/kubernetes/admin.conf, then ncn-s001 waits for any worker node to become available.
-1. Once each worker node notices that ncn-m002 has created /etc/cray/kubernetes/join-command-control-plan, then it will join the Kubernetes cluster.  
+1. Once each worker node notices that ncn-m002 has created /etc/cray/kubernetes/join-command-control-plan, then it will join the Kubernetes cluster.
     - Now ncn-s001 should notice this from any one of the worker nodes and move forward with creation of config maps and running the post-ceph playbooks (s3, OSD pools, quotas, etc.)
 1. Once ncn-s001 creates etcd-backup-s3-credentials during the benji-backups role which is one of the last roles after Ceph has been set up, then ncn-m001 notices this and moves forward
 
@@ -416,7 +416,7 @@ The configuration workflow described here is intended to help understand the exp
 
     ```
     Device Path               Size         rotates available Model name
-    /dev/sda                  447.13 GB    False   False     SAMSUNG MZ7LH480 
+    /dev/sda                  447.13 GB    False   False     SAMSUNG MZ7LH480
     /dev/sdb                  447.13 GB    False   False     SAMSUNG MZ7LH480
     /dev/sdc                  3.49 TB      False   False     SAMSUNG MZ7LH3T8
     /dev/sdd                  3.49 TB      False   False     SAMSUNG MZ7LH3T8
@@ -541,7 +541,7 @@ Observe the output of the checks and note any failures, then remediate them.
    1. Return to the 'Boot the **Storage Nodes**' step of [Start Deployment](#start-deployment) section above.
 
 <a name="optional-validation"></a>
-### Optional Validation 
+### Optional Validation
 
 These tests are for sanity checking. These exist as software reaches maturity, or as tests are worked
 and added into the installation repertoire.

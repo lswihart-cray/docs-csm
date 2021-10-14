@@ -6,4 +6,4 @@ Pending sessions can be found with the following command:
 cray cfs sessions list --format json | jq '.[] | select(.status.session.status=="pending") | {name}'
 ```
 
-Stuck sessions that were created by the cfs-batcher can block further sessions from being scheduled against the same components.  In the event that sessions are not being scheduled against some components, check the list of pending sessions to see if any are stuck and targeting the same component.  
+Stuck sessions that were created by the cfs-batcher can block further sessions from being scheduled against the same components.  In the event that sessions are not being scheduled against some components, check the list of pending sessions to see if any are stuck and targeting the same component.

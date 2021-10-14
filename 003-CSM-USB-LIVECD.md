@@ -27,7 +27,7 @@ Fetch the base installation CSM tarball and extract it, installing the contained
    linux# export PS1='\u@\H \D{%Y-%m-%d} \t \w # '
    ```
 
-> **`INTERNAL USE`** The `ENDPOINT` URL below are for internal use. Customers do not need to download any additional 
+> **`INTERNAL USE`** The `ENDPOINT` URL below are for internal use. Customers do not need to download any additional
 > artifacts, the CSM tarball is included along with the Shasta release.
 
 2. If necessary, download the CSM software release to the Linux host which will be preparing the LiveCD.
@@ -39,12 +39,12 @@ Fetch the base installation CSM tarball and extract it, installing the contained
    ```
 
 3. Expand the CSM software release:
-   > **`IMPORTANT`** Before proceeding, refer to the "CSM Patch Assembly" section of the Shasta Install Guide 
+   > **`IMPORTANT`** Before proceeding, refer to the "CSM Patch Assembly" section of the Shasta Install Guide
    > to apply any needed patch content for CSM. It is critical to perform these steps to ensure that the correct
    > CSM release artifacts are deployed.
-   > 
-   > **`WARNING`** Ensure that the `CSM_RELEASE` environment variable is set to the version of the patched CSM release tarball. 
-   > Applying the "CSM Patch Assembly" procedure will result in a different CSM version when compared to 
+   >
+   > **`WARNING`** Ensure that the `CSM_RELEASE` environment variable is set to the version of the patched CSM release tarball.
+   > Applying the "CSM Patch Assembly" procedure will result in a different CSM version when compared to
    > the pre-patched CSM release tarball.
    ```bash
    linux# tar -zxvf ${CSM_RELEASE}.tar.gz
@@ -69,7 +69,7 @@ Fetch the base installation CSM tarball and extract it, installing the contained
    linux# rpm -Uvh --force ${CSM_PATH}/rpm/cray/csm/sle-15sp2/x86_64/cray-site-init-*.x86_64.rpm
    ```
 
-6. Download and install the workaround and documentation RPMs. If this machine does not have direct internet 
+6. Download and install the workaround and documentation RPMs. If this machine does not have direct internet
    access these RPMs will need to be externally downloaded and then copied to be installed.
 
    ```bash
@@ -172,7 +172,7 @@ which device that is.
     [7:0:0:0]    disk    ATA      SAMSUNG MZ7LH480 404Q  /dev/sdb
     [8:0:0:0]    disk    ATA      SAMSUNG MZ7LH480 404Q  /dev/sdc
     [14:0:0:0]   disk    SanDisk  Extreme SSD      1012  /dev/sdd
-    [14:0:0:1]   enclosu SanDisk  SES Device       1012  -      
+    [14:0:0:1]   enclosu SanDisk  SES Device       1012  -
     ```
     In the above example, we can see our internal disks as the `ATA` devices and our USB as the `disk` or `enclosu` device. Since the `SanDisk` fits the profile we are looking for, we are going to use `/dev/sdd` as our disk.
 
@@ -250,7 +250,7 @@ Pull these files into the current working directory:
 - `switch_metadata.csv`
 - `system_config.yaml` (see below)
 
-> The optional `application_node_config.yaml` file may be provided for further defining of settings relating to how application nodes will appear in HSM for roles and subroles. See the CSI usage for more information.  
+> The optional `application_node_config.yaml` file may be provided for further defining of settings relating to how application nodes will appear in HSM for roles and subroles. See the CSI usage for more information.
 
 > The optional `cabinets.yaml` file allows cabinet naming and numbering as well as some networking overrides (e.g. VLAN) which will allow systems on Shasta v1.3 to minimize changes to the existing system while migrating to Shasta v1.4. More information on this file can be found [here](310-CABINETS.md).
 
@@ -360,7 +360,7 @@ After gathering the files into the working directory, generate your configs:
    * Set site parameters (site-domain, site-ip, site-gw, site-nic, site-dns) for the information which connects the ncn-m001 (PIT) node to the site. The site-nic is the interface on this node connected to the site. If coming from Shasta v1.3, the information for all of these site parameters was collected.
    * There are other interfaces possible, but the install-ncn-bond-members are typically: p1p1,p10p1 for HPE nodes; p1p1,p1p2 for Gigabyte nodes; and p801p1,p801p2 for Intel nodes. If coming from Shasta v1.3, this information was collected for ncn-m001.
    * Set the three cabinet parameters (mountain-cabinets, hill-cabinets, and river-cabinets) to the number of each cabinet which are part of this system.
-   * The starting cabinet number for each type of cabinet (for example, starting-mountain-cabinet) has a default that can be overridden. See the "csi config init --help" 
+   * The starting cabinet number for each type of cabinet (for example, starting-mountain-cabinet) has a default that can be overridden. See the "csi config init --help"
    * For systems that use non-sequential cabinet id numbers, use cabinets-yaml to include the cabinets.yaml file. This file can include information about the starting ID for each cabinet type and number of cabinets which have separate command line options, but is a way to explicitly specify the id of every cabinet in the system. This process is described [here](310-CABINETS.md).
    * An override to default cabinet IPv4 subnets can be made with the hmn-mtn-cidr and nmn-mtn-cidr parameters. These are also used to maintain existing configuration in a Shasta v1.3 system.
    * Several parameters (can-gateway, can-cidr, can-static-pool, can-dynamic-pool) describe the CAN (Customer Access network). The can-gateway is the common gateway IP used for both spine switches and commonly referred to as the Virtual IP for the CAN. The can-cidr is the IP subnet for the CAN assigned to this system. The can-static-pool and can-dynamic-pool are the MetalLB address static and dynamic pools for the CAN. The can-external-dns is the static IP assigned to the DNS instance running in the cluster to which requests the cluster subdomain will be forwarded. The can-external-dns IP must be within the can-static-pool range.
@@ -608,7 +608,7 @@ On first login (over SSH or at local console) the LiveCD will prompt the adminis
    pit# export PS1='\u@\H \D{%Y-%m-%d} \t \w # '
    ```
    
-4. Download and install/upgrade the workaround and documentation RPMs. If this machine does not have direct internet 
+4. Download and install/upgrade the workaround and documentation RPMs. If this machine does not have direct internet
    access these RPMs will need to be externally downloaded and then copied to be installed.
    ```bash
    pit# rpm -Uvh --force https://storage.googleapis.com/csm-release-public/shasta-1.4/docs-csm/docs-csm-latest.noarch.rpm
