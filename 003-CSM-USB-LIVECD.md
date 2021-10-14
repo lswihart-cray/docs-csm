@@ -23,7 +23,7 @@ Fetch the base installation CSM tarball and extract it, installing the contained
 
 1. Start a typescript to capture the commands and output from this installation.
    ```bash
-   linux# script -af csm-usb-lived.$(date +%Y-%m-%d).txt
+   linux# script -af csm-usb-livecd.$(date +%Y-%m-%d).txt
    linux# export PS1='\u@\H \D{%Y-%m-%d} \t \w # '
    ```
 
@@ -501,7 +501,7 @@ This will enable SSH, and other services when the LiveCD starts.
     linux# cd; umount /mnt/pitdata
     ```
 
-11. Quit the typescript session with the `exit` command and copy the file (csm-usb-lived.<date>.txt) to a location on another server for reference later.
+11. Quit the typescript session with the `exit` command and copy the file (csm-usb-livecd.<date>.txt) to a location on another server for reference later.
 
 Now the USB stick may be reattached to the CRAY, or if it was made on the CRAY then its server can now
 reboot into the LiveCD.
