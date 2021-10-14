@@ -4,7 +4,7 @@ This page is designed to be a guide on how all nodes in a Shasta system are wire
 
 - Prerequisites
  - System SHCD
- - PoR Cabling Docs [MGMT-NET-CABLING](416-MGMT-NET-CABLING.md)
+ - PoR Cabling Documentation [MGMT-NET-CABLING](416-MGMT-NET-CABLING.md)
 
 ## Steps
 

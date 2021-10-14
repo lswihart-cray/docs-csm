@@ -26,8 +26,6 @@ Examples of when you may wish to run them are:
 
 The areas should be tested in the order they are listed on this page. Errors in an earlier check may cause errors in later checks due to dependencies.
 
-For more details on these validations and health checks, see the admin guide (note to docs team: replace this with a reference to the specific section of the admin guide).
-
 <a name="platform-health-checks"></a>
 ## Platform Health Checks
 
@@ -588,7 +586,6 @@ At the time of this writing there is a bug ([CASMTRIAGE-553](https://connect.us.
   * The last line of output from the tool reports FAILURE
   * The return code is non-0.
 * Unless the test was run in verbose mode, the log file will contain additional information about the execution.
-* For more detailed information on the tests, please see the CSM Validation section of the admin guide (note to docs writers: replace this with the actual document name and section number/title once available).
 
 <a name="cms-checks"></a>
 ### Checks To Run

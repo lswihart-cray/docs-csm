@@ -21,7 +21,7 @@ This guide shows the process for generating the `hmn_connections.json` from the 
     ● docker.service - Docker Application Container Engine
     Loaded: loaded (/usr/lib/systemd/system/docker.service; disabled; vendor preset: disabled)
     Active: inactive (dead)
-        Docs: http://docs.docker.com
+        Documentation: http://docs.docker.com
     ``` 
 
     If the service is not running start it:

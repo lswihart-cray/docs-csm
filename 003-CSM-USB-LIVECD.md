@@ -48,21 +48,25 @@ Fetch the base installation CSM tarball and extract it, installing the contained
    > the pre-patched CSM release tarball.
    ```bash
    linux# tar -zxvf ${CSM_RELEASE}.tar.gz
-   linux# ls -l ${CSM_RELEASE}
+   linux# export CSM_PATH=$(pwd)/${CSM_RELEASE}
+   linux# ls -l ${CSM_PATH}
    ```
    The ISO and other files are now available in the extracted CSM tar.
 
-4. Remove any previously-installed versions of CSI, the CSM install docs, and the CSM install workarounds.
+4. Remove any previously-installed versions of CSI, the CSM install documentation, and the CSM install workarounds.
 
     > It is okay if this command reports that one or more of the packages are not installed.
 
     ```bash
-    linux# rpm -e cray-site-init csm-install-workarounds docs-csm
+    linux# rpm -ev cray-site-init csm-install-workarounds docs-csm
     ```
 
 5. Install the CSI RPM.
+
+   Make sure the `CSM_PATH` variable is set to the directory of your expanded CSM tarball.
+
    ```bash
-   linux# rpm -Uvh --force ./${CSM_RELEASE}/rpm/cray/csm/sle-15sp2/x86_64/cray-site-init-*.x86_64.rpm
+   linux# rpm -Uvh --force ${CSM_PATH}/rpm/cray/csm/sle-15sp2/x86_64/cray-site-init-*.x86_64.rpm
    ```
 
 6. Download and install the workaround and documentation RPMs. If this machine does not have direct internet 
@@ -74,6 +78,7 @@ Fetch the base installation CSM tarball and extract it, installing the contained
    ```
 
 7. Show the version of CSI installed.
+
    ```bash
    linux# csi version
    ```
@@ -97,7 +102,7 @@ Fetch the base installation CSM tarball and extract it, installing the contained
 
    * Add the `embedded` repository (if necessary):
      ```bash
-     linux# zypper ar -fG "./${CSM_RELEASE}/rpm/embedded" "${CSM_RELEASE}-embedded"
+     linux# zypper ar -fG "${CSM_PATH}/rpm/embedded" "${CSM_RELEASE}-embedded"
      ```
      
    * Install `podman` and `podman-cni-config` packages:
@@ -106,7 +111,7 @@ Fetch the base installation CSM tarball and extract it, installing the contained
      ```
 
    Or you may use `rpm -Uvh` to install RPMs (and their dependencies) manually
-   from the `./${CSM_RELEASE}/rpm/embedded` directory.
+   from the `${CSM_PATH}/rpm/embedded` directory.
 
 9. Install lsscsi to view attached storage devices.
 
@@ -115,7 +120,7 @@ Fetch the base installation CSM tarball and extract it, installing the contained
 
    * Add the `embedded` repository (if necessary):
      ```bash
-     linux# zypper ar -fG "./${CSM_RELEASE}/rpm/embedded" "${CSM_RELEASE}-embedded"
+     linux# zypper ar -fG "${CSM_PATH}/rpm/embedded" "${CSM_RELEASE}-embedded"
      ```
      
    * Install `lsscsi` package:
@@ -124,7 +129,7 @@ Fetch the base installation CSM tarball and extract it, installing the contained
      ```
 
    Or you may use `rpm -Uvh` to install RPMs (and their dependencies) manually
-   from the `./${CSM_RELEASE}/rpm/embedded` directory.
+   from the `${CSM_PATH}/rpm/embedded` directory.
 
 10. Although not strictly required, the procedures for setting up the
    `site-init` directory recommend persisting `site-init` files in a Git
@@ -135,7 +140,7 @@ Fetch the base installation CSM tarball and extract it, installing the contained
    
    * Add the `embedded` repository (if necessary):
      ```bash
-     linux# zypper ar -fG "./${CSM_RELEASE}/rpm/embedded" "${CSM_RELEASE}-embedded"
+     linux# zypper ar -fG "${CSM_PATH}/rpm/embedded" "${CSM_RELEASE}-embedded"
      ```
      
    * Install `git` package:
@@ -144,7 +149,7 @@ Fetch the base installation CSM tarball and extract it, installing the contained
      ```
 
    Or you may use `rpm -Uvh` to install RPMs (and their dependencies) manually
-   from the `./${CSM_RELEASE}/rpm/embedded` directory.
+   from the `${CSM_PATH}/rpm/embedded` directory.
 
 
 <a name="create-the-bootable-media"></a>
@@ -181,11 +186,11 @@ which device that is.
 
     On Linux using the CSI application:
     ```bash
-    linux# csi pit format $USB ~/${CSM_RELEASE}/cray-pre-install-toolkit-*.iso 50000
+    linux# csi pit format $USB "${CSM_PATH}"/cray-pre-install-toolkit-*.iso 50000
     ```
     On MacOS using the bash script:
     ```bash
-    macos# ./cray-site-init/write-livecd.sh $USB ~/${CSM_RELEASE}/cray-pre-install-toolkit-*.iso 50000
+    macos# ./cray-site-init/write-livecd.sh $USB "${CSM_PATH}"/cray-pre-install-toolkit-*.iso 50000
     ```
 
     > NOTE: At this point the USB stick is usable in any server with an x86_64 architecture based CPU. The remaining steps help add the installation data and enable SSH on boot.
@@ -194,13 +199,13 @@ which device that is.
 
     ```bash
     linux# mkdir -pv /mnt/{cow,pitdata}
-    linux# mount -L cow /mnt/cow && mount -L PITDATA /mnt/pitdata
+    linux# mount -vL cow /mnt/cow && mount -vL PITDATA /mnt/pitdata
     ```
 
 4.  Copy and extract the tarball (compressed) into the USB:
     ```bash
-    linux# cp -r ~/${CSM_RELEASE}.tar.gz /mnt/pitdata/
-    linux# tar -zxvf ~/${CSM_RELEASE}.tar.gz -C /mnt/pitdata/
+    linux# cp -rv "${CSM_PATH}.tar.gz" /mnt/pitdata/
+    linux# tar -zxvf "${CSM_PATH}.tar.gz" -C /mnt/pitdata/
     ```
 
 The USB stick is now bootable and contains our artifacts. This may be useful for internal or quick usage. Administrators seeking a Shasta installation must continue onto the [configuration payload](#configuration-payload).
@@ -396,8 +401,7 @@ Check for workarounds in the `/opt/cray/csm/workarounds/csi-config` directory. I
 <a name="shasta-cfg"></a>
 ### SHASTA-CFG
 
-Now execute [the procedures in 067-SHASTA-CFG.md](067-SHASTA-CFG.md) to prepare the `site-init` directory for your system.
-
+Now execute [the procedures in 067-SHASTA-CFG.md](067-SHASTA-CFG.md) to prepare the `site-init` directory for your system. **Do not skip this step.**
 
 <a name="pre-populate-livecd-daemons-configuration-and-ncn-artifacts"></a>
 ## Pre-Populate LiveCD Daemons Configuration and NCN Artifacts
@@ -443,14 +447,14 @@ This will enable SSH, and other services when the LiveCD starts.
 
 4. Unmount the Overlay, we are done with it
     ```bash
-    linux# umount /mnt/cow    
+    linux# umount /mnt/cow
     ```
 
 5. Make directories needed for basecamp (cloud-init) and the squashFS images
 
     ```bash
-    linux# mkdir -p /mnt/pitdata/configs/
-    linux# mkdir -p /mnt/pitdata/data/{k8s,ceph}/
+    linux# mkdir -pv /mnt/pitdata/configs/
+    linux# mkdir -pv /mnt/pitdata/data/{k8s,ceph}/
     ```
 
 6. Copy basecamp data
@@ -473,8 +477,11 @@ This will enable SSH, and other services when the LiveCD starts.
    ```
 
 8. Copy k8s artifacts:
+
+    Make sure the `CSM_PATH` variable is set to the directory of your expanded CSM tarball.
+    
     ```bash
-    linux# csi pit populate pitdata ~/${CSM_RELEASE}/images/kubernetes/ /mnt/pitdata/data/k8s/ -kiK
+    linux# csi pit populate pitdata "${CSM_PATH}/images/kubernetes/" /mnt/pitdata/data/k8s/ -kiK
     ```
     
     Expected output looks similar to the following:
@@ -485,8 +492,11 @@ This will enable SSH, and other services when the LiveCD starts.
     ```
 
 9. Copy ceph/storage artifacts:
+
+    Make sure the `CSM_PATH` variable is set to the directory of your expanded CSM tarball.
+    
     ```bash
-    linux# csi pit populate pitdata ~/${CSM_RELEASE}/images/storage-ceph/ /mnt/pitdata/data/ceph/ -kiC
+    linux# csi pit populate pitdata "${CSM_PATH}/images/storage-ceph/" /mnt/pitdata/data/ceph/ -kiC
     ```
     
     Expected output looks similar to the following:
@@ -594,15 +604,15 @@ On first login (over SSH or at local console) the LiveCD will prompt the adminis
 3. Start a typescript to record this section of activities done on ncn-m001 while booted from the LiveCD.
 
    ```bash
-   pit# script -af booted-csm-lived.$(date +%Y-%m-%d).txt
+   pit# script -af booted-csm-livecd.$(date +%Y-%m-%d).txt
    pit# export PS1='\u@\H \D{%Y-%m-%d} \t \w # '
    ```
    
 4. Download and install/upgrade the workaround and documentation RPMs. If this machine does not have direct internet 
    access these RPMs will need to be externally downloaded and then copied to be installed.
    ```bash
-   pit# rpm -Uvh https://storage.googleapis.com/csm-release-public/shasta-1.4/docs-csm/docs-csm-latest.noarch.rpm
-   pit# rpm -Uvh https://storage.googleapis.com/csm-release-public/shasta-1.4/csm-install-workarounds/csm-install-workarounds-latest.noarch.rpm
+   pit# rpm -Uvh --force https://storage.googleapis.com/csm-release-public/shasta-1.4/docs-csm/docs-csm-latest.noarch.rpm
+   pit# rpm -Uvh --force https://storage.googleapis.com/csm-release-public/shasta-1.4/csm-install-workarounds/csm-install-workarounds-latest.noarch.rpm
    ```
 
 5. Check the pit-release version.

@@ -20,13 +20,13 @@ This page describes rebooting and deploying the non-compute node that is current
 These services must be healthy in Kubernetes before the reboot of the LiveCD can take place.
 
 Required Platform Services:
-- cray-dhcp-kea
-- cray-dns-unbound
-- cray-bss
-- cray-sls
-- cray-s3
-- cray-ipxe
-- cray-tftp
+- `cray-dhcp-kea`
+- `cray-dns-unbound`
+- `cray-bss`
+- `cray-sls`
+- `cray-s3`
+- `cray-ipxe`
+- `cray-tftp`
 
 <a name="notice-of-danger"></a>
 ## Notice of Danger
@@ -142,14 +142,12 @@ all been run by the administrator before starting this stage.
     ```bash
     pit# efibootmgr | grep -Ei "ip(v4|4)"
     ```
-    
-1. Set the boot order for **masters** from one of the following guides:
-    
-    > `**NOTE**` If your boot order from `efibootmgr` looks like one of [these examples](101-NCN-BOOTING.md#examples) then you can proceed to the next step.
-    
-    - [Gigabyte Technology](101-NCN-BOOTING.md#gigabyte-technology)
-    - [Hewlett Packard Enterprise](101-NCN-BOOTING.md#hewlett-packard-enterprise)
-    - [Intel Corporation](101-NCN-BOOTING.md#intel-corporation)
+
+1. Configure and trim UEFI entries on the PIT node.
+
+    On the PIT node, do the following two steps outlined in [Fixing Boot-Order](101-NCN-BOOTING.md#set-boot-order). For options that depend on the node type, treat it as a master node.
+        1. [Setting Order](101-NCN-BOOTING.md#setting-order)
+        1. [Trimming](101-NCN-BOOTING.md#trimming)
     
 1. Identify Port-1 of Riser-1 in `efibootmgr` output and set `PXEPORT` variable.
     
@@ -238,7 +236,7 @@ all been run by the administrator before starting this stage.
     inet6 fe80::1602:ecff:fed9:7820/64 scope link
     ```
     
-    Now login from another machine to verify that IP is usable
+    Now log in from another machine to verify that the IP address is usable
     
     ```bash
     external# ssh root@10.102.11.13
@@ -290,7 +288,7 @@ all been run by the administrator before starting this stage.
     
     The thing to verify is that there are no error messages in the output.
     
-1. Quit the typescript session with the `exit` command and copy the file (`booted-csm-lived.<date>.txt`) to a location on another server for reference later.
+1. Quit the typescript session with the `exit` command and copy the file (`booted-csm-livecd.<date>.txt`) to a location on another server for reference later.
     
     ```bash
     pit# exit
