@@ -109,6 +109,8 @@ Perform these steps to update `customizations.yaml`:
 
 Run check script:
 
+**NOTE** The `prerequisites.sh` script will warn that it will unmount `/mnt/pitdata`, but this is not accurate. The script will only unmount it if the script itself mounts it. That is, if it is mounted when the script begins, the script will not unmount it.
+
 * Internet Connected
 
     ```bash
